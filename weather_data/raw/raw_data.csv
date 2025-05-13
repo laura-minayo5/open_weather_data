@@ -1,0 +1,6 @@
+weather_description,city_name,country,latitude,longitude,temperature,feels_like_farenheit,min_temp_fahrenheit,max_temp_farenheit,humidity,pressure,wind_speed,datetime,data_received_at
+broken clouds,Kampala,UG,0.3163,32.5822,297.6,297.67,297.6,297.6,60,1010,2.65,2025-05-08T14:48:39,2025-05-08 14:53:05.443180
+moderate rain,Kigali,RW,-1.95,30.0588,295.22,295.05,295.22,295.86,60,1012,3.09,2025-05-08T14:52:28,2025-05-08 14:53:05.443180
+light rain,Nairobi,KE,-1.2833,36.8167,296.08,295.81,295.77,296.08,53,1012,10.29,2025-05-08T14:50:04,2025-05-08 14:53:05.443180
+broken clouds,Zurich,CH,47.3667,8.55,288.13,287.15,286.66,289.42,56,1011,5.14,2025-05-08T14:52:58,2025-05-08 14:53:05.443180
+clear sky,Warsaw,PL,52.2298,21.0118,284.36,282.58,283.61,285.75,40,1017,4.12,2025-05-08T14:52:59,2025-05-08 14:53:05.443180
