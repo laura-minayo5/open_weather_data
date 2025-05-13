@@ -1,0 +1,9 @@
+pandas
+python-dotenv
+sqlalchemy
+psycopg2
+requests
+google-cloud-storage
+pandas gcsfs
+google-cloud-bigquery
+
