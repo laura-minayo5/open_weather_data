@@ -82,7 +82,7 @@ def create_bq_table2( project_id, dataset_id, table_id):
     # Specify the schema for the table
     schema = [
          bigquery.SchemaField("date", "DATE", mode= "NULLABLE"),
-         bigquery.SchemaField("time", "TIMESTAMP", mode= "NULLABlE"),
+         bigquery.SchemaField("time", "TIMESTAMP", mode= "NULLABLE"),
          bigquery.SchemaField("city_id", "INTEGER", mode= "REQUIRED"),
          bigquery.SchemaField("country", "STRING", mode= "REQUIRED"),
          bigquery.SchemaField("temperature", "FLOAT", mode= "NULLABLE"),
