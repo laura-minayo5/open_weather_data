@@ -4,6 +4,7 @@ sqlalchemy
 psycopg2
 requests
 google-cloud-storage
-pandas gcsfs
+pandas
+gcsfs
 google-cloud-bigquery
-
+cryptography

@@ -13,7 +13,7 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 api_endpoint = "https://api.openweathermap.org/data/2.5/weather"
-# data path to save raw data and cleaned data
+# data path to get raw data and save cleaned data
 raw_data_path = 'weather_data/raw/raw_data.csv'
 cleaned_data_path1 = 'weather_data/cleaned/dim_data.csv'
 cleaned_data_path2 = 'weather_data/cleaned/fact_data.csv'
@@ -42,5 +42,5 @@ def transform_weather_data(raw_input_path, cleaned_output_path1, cleaned_output_
      fact_df.to_csv(cleaned_output_path2, index=False)
 
      logger.info("weather data transformed successfully")
-
-transform_weather_data(raw_input_path= raw_data_path, cleaned_output_path1= cleaned_data_path1, cleaned_output_path2= cleaned_data_path2)
+if __name__ == "__main__": # running this python file as a  standalone script
+    transform_weather_data(raw_input_path= raw_data_path, cleaned_output_path1= cleaned_data_path1, cleaned_output_path2= cleaned_data_path2)

@@ -77,4 +77,5 @@ def extract_openweather_data(url, bucket_name, destination_blob_path):
         else:
             print(f"Error fetching data for {data['name']}: {response.status_code}")
 
-extract_openweather_data(url= api_endpoint, bucket_name= bucket, destination_blob_path= raw_data_path)
+if __name__ == '__main__':
+    extract_openweather_data(url= api_endpoint, bucket_name= bucket, destination_blob_path= raw_data_path)

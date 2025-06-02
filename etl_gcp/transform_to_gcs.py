@@ -74,5 +74,5 @@ def transform_weather_data(bucket_name, source_blob_path, cleaned_blob_path1, cl
     print(f"Uploaded fact_df dataframe to gcs://{bucket_name}/{cleaned_blob_path2} as CSV file")
 
     logger.info("weather data transformed successfully")
-
-transform_weather_data(bucket_name= bucket, source_blob_path= raw_data_path, cleaned_blob_path1= cleaned_data_path1, cleaned_blob_path2= cleaned_data_path2)
+if __name__ == '__main__':
+     transform_weather_data(bucket_name= bucket, source_blob_path= raw_data_path, cleaned_blob_path1= cleaned_data_path1, cleaned_blob_path2= cleaned_data_path2)

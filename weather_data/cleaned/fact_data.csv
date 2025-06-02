@@ -1,6 +1,6 @@
 city_id,city_name,country,latitude,longitude
 1.0,Kampala,UG,0.3163,32.5822
 1.0,Kigali,RW,-1.95,30.0588
-1.0,Nairobi,KE,-1.2833,36.8167
-2.0,Zurich,CH,47.3667,8.55
+2.0,Nairobi,KE,-1.2833,36.8167
+3.0,Zurich,CH,47.3667,8.55
 1.0,Warsaw,PL,52.2298,21.0118

@@ -119,7 +119,7 @@ def load_csv_to_bigquery(project_id, dataset_id, table_id1, table_id2):
     job_config = bigquery.LoadJobConfig(
           source_format=bigquery.SourceFormat.CSV,
           skip_leading_rows=1, # Skip header row
-          autodetect=True, # Automatically infer schema
+           # autodetect=True, # Automatically infer schema
           write_disposition=bigquery.WriteDisposition.WRITE_TRUNCATE,
           null_marker = ''
     )
@@ -152,7 +152,8 @@ def load_csv_to_bigquery(project_id, dataset_id, table_id1, table_id2):
          # final clean up
          print(f"Loading Process Completed Succefully")
 # function call to create dataset, tables and load the csv files to bigquery dataset
-create_bigquery_dataset(dataset_id= dataset_name, project_id= project_id, location= location)
-create_bq_table1(project_id= project_id, dataset_id = dataset_name, table_id = cities_table)
-create_bq_table2(project_id= project_id, dataset_id = dataset_name, table_id = measurements_table)
-load_csv_to_bigquery(project_id=project_id, dataset_id = dataset_name, table_id1 = cities_table, table_id2 = measurements_table)
+if __name__ == '__main__':
+     create_bigquery_dataset(dataset_id= dataset_name, project_id= project_id, location= location)
+     create_bq_table1(project_id= project_id, dataset_id = dataset_name, table_id = cities_table)
+     create_bq_table2(project_id= project_id, dataset_id = dataset_name, table_id = measurements_table)
+     load_csv_to_bigquery(project_id=project_id, dataset_id = dataset_name, table_id1 = cities_table, table_id2 = measurements_table)

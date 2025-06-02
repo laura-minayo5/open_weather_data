@@ -45,4 +45,5 @@ def load_to_db(db_host, db_name, db_user, db_password, db_port): # (op_kwargs)
     df.to_sql( name='open_weather_data', con=engine, schema=db_schema, if_exists='replace', index=False)
     
     logger.info("weather data loaded successfully!")
-load_to_db(db_name, db_user, db_password, db_host, port)
+    if __name__ == "__main__":
+        load_to_db(db_name, db_user, db_password, db_host, port)

@@ -1,0 +1,82 @@
+services:
+# container created for storing recalls data
+  destination_postgres:
+    image: postgres:latest
+    ports:
+      - '5439:5432'
+    networks:
+      - weather_data_etl
+    env_file:
+      - destination_postgres.env
+    volumes:
+      - ./weather-db-volume:/var/lib/postgresql/weather_data_schema
+  postgres: #stores all the configuration details, task states, and execution metadata for airflow
+    image: postgres:latest
+    networks:
+      - weather_data_etl
+    env_file:
+      - postgres.env
+    volumes:
+      - ./postgres-db-volume:/var/lib/postgresql/weather_data
+  init-airflow: #Initializes the user and the postgres db for airflow 
+    image: apache/airflow:latest
+    depends_on:
+      - postgres
+    networks:
+      - weather_data_etl
+    environment:
+      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres/airflow
+    command: > # creating account for logging in.
+      bash -c "airflow db init && 
+               airflow users create --username airflow --password password --firstname Laura --lastname Minayo --role Admin --email admin@example.com"
+  webserver: # provides a user interface for interacting with Airflow
+    build:
+      context: .
+      dockerfile: Dockerfile
+    user: root
+    depends_on:
+      - postgres
+    networks:
+      - weather_data_etl
+    extra_hosts:
+      - "host.docker.internal:host-gateway" # for local DAGs need connecting to server running on host
+    volumes:
+      - ./airflow/dags:/opt/airflow/dags # bind mounts airflow/dags dir to opt/airflow/dags in the container
+      - ./airflow/logs:/opt/airflow/logs
+      - ./weather_data:/opt/airflow/weather_data
+      - ./airflow/plugins:/opt/airflow/plugins
+        # Mount the docker socket from the host (currently my laptop) into the webserver container
+      - //var/run/docker.sock:/var/run/docker.sock # double // are necessary for windows host
+    env_file:
+      - webserver.env
+    ports:
+      - "8080:8080" # port for web servers
+    command: webserver
+  scheduler: # monitors all tasks and DAGs then triggers the task instances once their dependencies are ready
+    build:
+      context: .
+      dockerfile: Dockerfile
+    user: root
+    depends_on:
+      - postgres
+    networks:
+      - weather_data_etl
+    extra_hosts:
+      - "host.docker.internal:host-gateway" 
+    volumes:
+      - ./airflow/dags:/opt/airflow/dags # bind mounts airflow/dags dir to opt/airflow/dags in the container
+      - ./weather_data:/opt/airflow/weather_data 
+      - ./airflow/logs:/opt/airflow/logs
+      - ./airflow/plugins:/opt/airflow/plugins
+      - //var/run/docker.sock:/var/run/docker.sock # double // are necessary for windows host
+    env_file:
+      - scheduler.env
+
+    command: scheduler
+volumes:
+  postgres-db-volume:
+  weather-db-volume:
+networks:
+  weather_data_etl:
+    driver: bridge
+  

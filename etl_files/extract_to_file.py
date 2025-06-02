@@ -14,7 +14,7 @@ logger = logging.getLogger(__name__)
 
 api_endpoint = "https://api.openweathermap.org/data/2.5/weather"
 # data path to save raw data
-raw_data_path = 'weather_data/raw/raw_data.csv'
+raw_data_path = './weather_data/raw/raw_data.csv'
 
 
 cities = [
@@ -54,7 +54,12 @@ def extract_openweather_data(url, raw_output_path):
             current_timestamp = datetime.now()
             weather_df['data_received_at'] = current_timestamp
             weather_df.to_csv(raw_output_path, header=True, index=False)
+            logger.info(f"Data extracted successfully from {api_endpoint}.")
 
         else:
-            print(f"Error fetching data for {data['name']}: {response.status_code}")
-extract_openweather_data(url= api_endpoint, raw_output_path=raw_data_path)
+            print(f"Error fetching data for {city['name']}: {response.status_code}")
+
+if __name__ == "__main__": # running this python file as a standalone script, such that when we import  
+    extract_openweather_data(url= api_endpoint, raw_output_path=raw_data_path)
+    
+
