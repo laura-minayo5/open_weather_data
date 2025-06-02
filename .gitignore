@@ -5,5 +5,8 @@ scheduler.env
 postgres.env
 webserver.env
 destination_postgres.env
+weather_data.egg-info
+airflow/logs
+
 
 
